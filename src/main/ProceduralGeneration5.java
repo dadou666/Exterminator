@@ -95,6 +95,10 @@ public class ProceduralGeneration5 {
 						if (i > 0) {
 							placerObjet("generateurBrouillard", la, 1);
 						}
+						if (i == 1) {
+							
+							placerObjet("radar",la,1);
+						}
 						placerObjet("celluleEnergie", la, 5);
 
 						// placerObjet("zoneProtection", la, 5);

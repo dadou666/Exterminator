@@ -186,7 +186,7 @@ public class nid extends elementDecor {
 			traitement = i.ajouter(() -> {
 				this.chargeNid();
 				this.gge.enregistrerTous();
-				Log.print(" fin charger ");
+			//	Log.print(" fin charger ");
 			});
 		}
 	}

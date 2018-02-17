@@ -90,7 +90,7 @@ public class construction extends MondeEventInterface {
 					a.hauteurInit =obj.pos.y;
 					a.om.testCollisionAvecAutreObjetMobile=false;
 					a.c = this;
-					Log.print(" objet ="+obj.color);
+				//	Log.print(" objet ="+obj.color);
 
 				}
 				
@@ -101,7 +101,7 @@ public class construction extends MondeEventInterface {
 					a.hauteurInit =obj.pos.y;
 					a.om.testCollisionAvecAutreObjetMobile=false;
 					a.c = this;
-					Log.print(" objet ="+obj.color);
+				//	Log.print(" objet ="+obj.color);
 
 				}
 				if (obj.type.equals("generateurBrouillard") && !joueur.generation) {
@@ -112,7 +112,7 @@ public class construction extends MondeEventInterface {
 					a.om.testCollisionAvecAutreObjetMobile=false;
 					a.c = this;
 					a.niveau = obj.color;
-					Log.print(" objet ="+obj.color);
+				//	Log.print(" objet ="+obj.color);
 					
 				}
 				if (obj.type.equals("reine")) {
@@ -147,6 +147,14 @@ public class construction extends MondeEventInterface {
 					jp.om.testCollisionAvecAutreObjetMobile = false;
 					jp.c = this;
 				}
+				if (obj.type.equals("radar")&& !joueur.generation) {
+					//obj.pos.y += 1.0f;
+					radar jp = i.creerObjet("objet#radar", obj.pos, 1.0f,
+							null, true, radar.class);
+					jp.hauteurInit = obj.pos.y;
+					jp.om.testCollisionAvecAutreObjetMobile = false;
+					jp.c = this;
+				}
 				if (obj.type.equals("transportVie")&& !joueur.generation) {
 					//obj.pos.y = 1.0f;
 					transportVie a = i.creerObjet("objet#coeur", obj.pos, 1.0f,
@@ -159,6 +167,7 @@ public class construction extends MondeEventInterface {
 		}
 		nidZombie nidCourant = this.joueur.nids.get(this.joueur.nidCourant);
 		nidCourant.actif = true;
+		Log.print(" nids ="+this.joueur.nids);
 		String nomModeles[] = new String[] { "objet#coeur", "objet#cercle",
 				"nid#model2", "perso#mdl", "objet#croixRouge", "objet#jetPack" };
 		Map<String, Float> distances = new HashMap<>();
