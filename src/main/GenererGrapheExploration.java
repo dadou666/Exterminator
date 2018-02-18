@@ -13,7 +13,7 @@ import dadou.tools.BrickEditor;
 public class GenererGrapheExploration {
 
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException, CouleurErreur {
-		String cheminRessources = "h:\\GitHub\\Constructeur";
+		String cheminRessources = "f:\\GitHub\\Constructeur";
 		BrickEditor.cheminRessources = cheminRessources;
 		int idxNoeud = 0;
 		File file = new File(cheminRessources + "\\nid" + idxNoeud + ".bin");

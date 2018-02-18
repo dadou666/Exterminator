@@ -72,10 +72,12 @@ public class construction extends MondeEventInterface {
 			for (ObjetItem obj : objets) {
 				if (obj.color.equals("porte")) {
 					if (portes.get(obj.type) == null) {
+
 						obj.pos.z -= 5;
 						obj.pos.x += 0.5f;
 						// obj.pos.y += 0.01f;
 						porte a = new porte();
+
 						a.testCollisionAvecDecor = false;
 						i.creerObjet("porte#porte", obj.pos, 1.0f, null, false,
 								a);
@@ -87,33 +89,35 @@ public class construction extends MondeEventInterface {
 					// Log.print("celluleEnergie");
 					arme a = i.creerObjet("objet#cercle", obj.pos, 0.50f, null,
 							true, arme.class);
-					a.hauteurInit =obj.pos.y;
-					a.om.testCollisionAvecAutreObjetMobile=false;
+					a.hauteurInit = obj.pos.y;
+					a.om.testCollisionAvecAutreObjetMobile = false;
 					a.c = this;
-				//	Log.print(" objet ="+obj.color);
+					// Log.print(" objet ="+obj.color);
 
 				}
-				
+
 				if (obj.type.equals("tourel") && !joueur.generation) {
-					obj.pos.y+=7.0f;
-					tourel a = i.creerObjet("objet#tourel", obj.pos, 0.25f, null,
-							true, tourel.class);
-					a.hauteurInit =obj.pos.y;
-					a.om.testCollisionAvecAutreObjetMobile=false;
+					obj.pos.y += 7.0f;
+					tourel a = i.creerObjet("objet#tourel", obj.pos, 0.25f,
+							null, true, tourel.class);
+					a.hauteurInit = obj.pos.y;
+					a.om.testCollisionAvecAutreObjetMobile = false;
 					a.c = this;
-				//	Log.print(" objet ="+obj.color);
+					// Log.print(" objet ="+obj.color);
 
 				}
-				if (obj.type.equals("generateurBrouillard") && !joueur.generation) {
-					obj.pos.y+=7.0f;
-					generateurBrouillard a = i.creerObjet("objet#generateurBrouillard", obj.pos, 0.25f, null,
+				if (obj.type.equals("generateurBrouillard")
+						&& !joueur.generation) {
+					obj.pos.y += 7.0f;
+					generateurBrouillard a = i.creerObjet(
+							"objet#generateurBrouillard", obj.pos, 0.25f, null,
 							true, generateurBrouillard.class);
-					a.hauteurInit =obj.pos.y;
-					a.om.testCollisionAvecAutreObjetMobile=false;
+					a.hauteurInit = obj.pos.y;
+					a.om.testCollisionAvecAutreObjetMobile = false;
 					a.c = this;
 					a.niveau = obj.color;
-				//	Log.print(" objet ="+obj.color);
-					
+					// Log.print(" objet ="+obj.color);
+
 				}
 				if (obj.type.equals("reine")) {
 
@@ -128,9 +132,9 @@ public class construction extends MondeEventInterface {
 					Log.print(" objet =" + obj.color);
 
 				}
-				if (obj.type.equals("exterminateur")&& !joueur.generation) {
+				if (obj.type.equals("exterminateur") && !joueur.generation) {
 					// Log.print("celluleEnergie");
-					//obj.pos.y += 1.0f;
+					// obj.pos.y += 1.0f;
 					croixRouge a = i.creerObjet("objet#croixRouge", obj.pos,
 							1.0f, null, true, croixRouge.class);
 					a.c = this;
@@ -139,24 +143,24 @@ public class construction extends MondeEventInterface {
 
 				}
 
-				if (obj.type.equals("jetPack")&& !joueur.generation) {
-					//obj.pos.y += 1.0f;
+				if (obj.type.equals("jetPack") && !joueur.generation) {
+					// obj.pos.y += 1.0f;
 					jetPack jp = i.creerObjet("objet#jetPack", obj.pos, 1.0f,
 							null, true, jetPack.class);
 					jp.hauteurInit = obj.pos.y;
 					jp.om.testCollisionAvecAutreObjetMobile = false;
 					jp.c = this;
 				}
-				if (obj.type.equals("radar")&& !joueur.generation) {
-					//obj.pos.y += 1.0f;
-					radar jp = i.creerObjet("objet#radar", obj.pos, 1.0f,
-							null, true, radar.class);
+				if (obj.type.equals("radar") && !joueur.generation) {
+					// obj.pos.y += 1.0f;
+					radar jp = i.creerObjet("objet#radar", obj.pos, 1.0f, null,
+							true, radar.class);
 					jp.hauteurInit = obj.pos.y;
 					jp.om.testCollisionAvecAutreObjetMobile = false;
 					jp.c = this;
 				}
-				if (obj.type.equals("transportVie")&& !joueur.generation) {
-					//obj.pos.y = 1.0f;
+				if (obj.type.equals("transportVie") && !joueur.generation) {
+					// obj.pos.y = 1.0f;
 					transportVie a = i.creerObjet("objet#coeur", obj.pos, 1.0f,
 							null, true, transportVie.class);
 					a.c = this;
@@ -167,7 +171,7 @@ public class construction extends MondeEventInterface {
 		}
 		nidZombie nidCourant = this.joueur.nids.get(this.joueur.nidCourant);
 		nidCourant.actif = true;
-		Log.print(" nids ="+this.joueur.nids);
+		Log.print(" nids =" + this.joueur.nids);
 		String nomModeles[] = new String[] { "objet#coeur", "objet#cercle",
 				"nid#model2", "perso#mdl", "objet#croixRouge", "objet#jetPack" };
 		Map<String, Float> distances = new HashMap<>();
@@ -281,23 +285,22 @@ public class construction extends MondeEventInterface {
 	public void boucler() {
 		// TODO Auto-generated method stub
 
-		i.ecrire(
-				"perso#mdl",
-				""
-						+ (compteurZombie.totalEncours)
-						);
+		i.ecrire("perso#mdl", "" + (compteurZombie.totalEncours));
 		if (joueur.generation) {
-		//	Log.print(" generation ...");
-			for (nidZombie nid : joueur.nids.values())
+			// Log.print(" generation ...");
+			for (Map.Entry<String, nidZombie> e : joueur.nids.entrySet()) {
+				nidZombie nid = e.getValue();
 				while (nid.init) {
+					
 					nid.calculerGrapheExplorationEnLargeur();
 					if (nid.gge != null) {
-//						Log.print(" init " + nid.color + " "+ nid.gge.lsOld.size());
+						Log.print(e.getKey() + "=" + nid.gge.totalGrapheExploration +" "+nid.gge.lsOld.size());
 					}
 					return;
 				}
-		
-			i.exit();
+			}
+			System.exit(0);	
+			//i.exit();
 		}
 
 	}

@@ -102,7 +102,7 @@ public class nid extends elementDecor {
 
 	@Override
 	public void tire(ObjetMobile om, String position) {
-
+		Log.print( "  niveau du nid = "+color);
 		if (!actif) {
 			return;
 		}
@@ -121,6 +121,7 @@ public class nid extends elementDecor {
 					c.joueur.afficherMessagePouvoir = new afficherMessagePouvoir();
 				} else {
 					p.ouvrir();
+
 				}
 				int idx = Integer.parseInt(c.joueur.nidCourant);
 				c.joueur.nidCourant = "" + (idx + 1);
@@ -178,10 +179,11 @@ public class nid extends elementDecor {
 	public void demarer(ObjetMobile om, Object args) {
 		om.testCollisionAvecAutreObjetMobile = false;
 		Vector3f pos = new Vector3f(om.getBox().getCenter());
-		pos.y -= 4.0f;
-
-		this.gge = i.creerGestionGrapheExploration(om.getBox().getCenter(),
-				2.5f, 15, new ArrayList<>());
+		pos.y -= 1.0f;
+		
+		float r = (float) (2.0*Math.sqrt(3.0));
+		this.gge = i.creerGestionGrapheExploration(pos,
+				r, 15, new ArrayList<>());
 		if (!c.joueur.generation) {
 			traitement = i.ajouter(() -> {
 				this.chargeNid();
@@ -247,16 +249,13 @@ public class nid extends elementDecor {
 
 	public void calculerGrapheExplorationEnLargeur() {
 		if (this.gge != null) {
-
-			if (!this.gge.calculerGrapheExplorationEnLargeur(4) && init) {
+				
+			if (!this.gge.calculerGrapheExplorationEnLargeur(4) ) {
 
 				this.gge.listeFeuillesTrie();
 
 				this.gge.filtrerAvecProfondeurAncetreCommun(0, 4);
-				if (gge.grapheDebug != null) {
-					gge.creerGrapheDebug();
-					i.debugGraphe(gge.grapheDebug);
-				}
+				
 				if (gge.listeFeuilles.size() == 1) {
 					return;
 				}
@@ -273,6 +272,7 @@ public class nid extends elementDecor {
 
 	@Override
 	public void boucle(ObjetMobile om) {
+		
 		if (this.traitement != null) {
 			if (!this.traitement.estTermine) {
 				return;
@@ -287,13 +287,15 @@ public class nid extends elementDecor {
 		if (init) {
 			return;
 		}
+		
 		if (!actif) {
 			return;
 		}
+	
 		if (this.gge.grapheDebug == null) {
-			this.gge.creerGrapheDebug();
+		//	this.gge.creerGrapheDebug();
 		}
-		// i.debugGraphe(this.gge.grapheDebug);
+		 i.debugGraphe(this.gge.grapheDebug);
 
 		if (t == 0) {
 			if (compteur().totalEncours >= Constante.nombreTeteMaxiEncours) {
@@ -302,7 +304,7 @@ public class nid extends elementDecor {
 			if (this.donnerCible() == null) {
 				return;
 			}
-			Vector3f posObjet = new Vector3f(om.getBox().getCenter());
+		
 
 			perso p = null;
 			p = i.creerObjet(this.model(), gge.racine.pos, 0.25f, null, true,
